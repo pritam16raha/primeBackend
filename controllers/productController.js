@@ -51,17 +51,18 @@ const removeProduct = async (req, res) => {
 };
 
 const singleProductDetails = async (req, res) => {
-  let singleProduct;
+  
   try{
-    singleProduct = await productModel.findById({ _id: req.params.id });
+    const singleProduct = await productModel.findById({ _id: req.params.id });
     if(!singleProduct){
       res.json({ success: false, message: "Error" })
     }
+    res.json({ success: true, product: singleProduct });
   }catch(error){
     console.log(error);
     res.json({ success: false, message: "Error" })
   }
-  res.json(singleProduct);
+  
 }
 
 export { addProduct, listProduct, removeProduct, singleProductDetails };
